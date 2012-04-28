@@ -1,0 +1,11 @@
+ticket:
+  # redmine, github or gitconfig
+  source: redmine
+
+redmine:
+  url: https://codefirst.org/redmine/
+  project: dashbozu
+  # or 'git config redmine.apikey your_key'
+
+github:
+  url: https://github.com/mistilteinn/mistilteinn-shell
