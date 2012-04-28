@@ -1,6 +1,7 @@
 package models
 import java.net.URI
 import java.util.Date
+import sjo
 
 sealed case class Activity(
   id        : String,
