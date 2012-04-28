@@ -1,7 +1,6 @@
 package models
 import java.net.URI
 import java.util.Date
-import sjson.json._
 
 sealed case class Activity(
   id        : String,
