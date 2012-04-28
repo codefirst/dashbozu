@@ -7,3 +7,4 @@ tmp
 dist
 .DS_Store
 *.swp
+test-result
