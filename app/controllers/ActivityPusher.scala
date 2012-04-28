@@ -8,7 +8,7 @@ import java.net.URI
 import dispatch.json._
 
 
-class ActivityPusher {
+object ActivityPusher {
   for {
     id <- Play.configuration.getString("pusher.id")
     key <- Play.configuration.getString("pusher.key")
@@ -26,12 +26,15 @@ class ActivityPusher {
     iconUrl = Some(new URI("http://dashbozu.herokuapp.com/assets/images/icons/redmine.png"))
   )
 
-  val html =
-    views.html.activity(act)
 
-  val json =
-    JsObject(Map(
-      JsString("html") -> JsString(html)
-    ))
-  println(Pusher.triggerPush("activity", "new", json.toString))
+  def publish(activity : Activity) = {
+    val html =
+      views.html.activity(activity)
+
+    val json =
+      JsObject(Map(
+        JsString("html") -> JsString(html)
+      ))
+    println(Pusher.triggerPush("activity", "new", json.toString))
+  }
 }

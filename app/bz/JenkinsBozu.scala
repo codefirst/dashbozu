@@ -7,8 +7,8 @@ import java.text.SimpleDateFormat
 import java.net.URI
 
 class JenkinsBozu extends Bozu {
-  def get(params : Map[String, String]) : List[Activity] = {
-    params.get("url").toList.flatMap(urlstring =>
+  def get(params : Map[String, Seq[String]]) : List[Activity] = {
+    params("url").toList.flatMap(urlstring =>
       Http( url(urlstring) <> {
         elem => (elem \\ "entry").flatMap(entry => {
           for {
