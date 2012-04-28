@@ -52,3 +52,10 @@ img.icon {
 .project {
     color: gray;
 }
+
+footer {
+    text-align: center;
+    color: #999;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
