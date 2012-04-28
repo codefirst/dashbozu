@@ -1,3 +1,5 @@
+package bz
+
 import models._
 
 trait Bozu {

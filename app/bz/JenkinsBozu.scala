@@ -1,3 +1,5 @@
+package bz
+
 import scala.xml._
 import dispatch._
 import models._
