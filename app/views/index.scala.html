@@ -2,27 +2,8 @@
 
 @main("index") {
 <div class="well activities">
-  @activities.map { activity =>
-  <div class="activity">
-    <div class="icon">
-      <img class="icon" src="@routes.Assets.at("images/icons/" + activity.source + ".png")" />
-    </div>
-    <div class="description">
-      <div class="title">
-        <img src="@activity.iconUrl" />
-        <a href="@activity.url">@activity.title</a>
-      </div>
-      <div class="project">
-        @activity.project
-      </div>
-      <div>
-        @Html(activity.body)
-      </div>
-      <div class="time">
-        @activity.createdAt
-      </div>
-    </div>
-  </div>
+  @activities.map { x =>
+    @activity(x)
   }
 </div>
 }
