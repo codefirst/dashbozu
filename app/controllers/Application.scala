@@ -69,7 +69,23 @@ object Application extends Controller {
     Ok(views.html.index(activities.toList))
   }
 
-  def hook(name : String) = Action { request =>
+  def hookPost(name : String) = Action { request =>
+    Bozu(name) map { bz =>
+      request.body match {
+        case AnyContentAsFormUrlEncoded(body) => Bozu(name) map { bz =>
+          bz.get(body).foreach {
+            ActivityPusher.publish(_)
+          }
+        }
+        case _ => {}
+      }
+      Ok("ok")
+    } getOrElse {
+      BadRequest("no such hook: " + name)
+    }
+  }
+
+  def hookGet(name : String) = Action { request =>
     Bozu(name) map { bz =>
       bz.get(request.queryString).foreach {
         ActivityPusher.publish(_)

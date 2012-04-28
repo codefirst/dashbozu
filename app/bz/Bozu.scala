@@ -13,6 +13,8 @@ object Bozu {
         Some(new JenkinsBozu)
       case "redmine" =>
         Some(new RedmineBozu)
+      case "git" =>
+        Some(new GitBozu)
       case _ =>
         None
     }
