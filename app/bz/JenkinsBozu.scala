@@ -15,8 +15,8 @@ class JenkinsBozu extends Bozu {
             id        <- (entry \ "link" \ "@href").headOption
             title     = (entry \ "title").text
             body      = ""
-            createdAt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").
-                          parse((entry \ "published").text)
+            createdAt = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").
+                          parse(((entry \ "id").text.split(":"))(3))
             source    = "jenkins"
             project   = (entry \ "id").text.split(":")(2)
             url       = Some(new URI(id.text))
