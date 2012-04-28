@@ -1,8 +1,10 @@
 package models
+
+
 import java.net.URI
 import java.util.Date
 
-sealed case class Activity(
+sealed case class Activity (
   id        : String,
   title     : String,
   body      : String,
@@ -12,3 +14,4 @@ sealed case class Activity(
   url       : Option[URI],
   iconUrl   : Option[URI]
 )
+

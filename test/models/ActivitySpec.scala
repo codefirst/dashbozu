@@ -4,10 +4,12 @@ import org.specs2.mutable._
 
 import play.api.test._
 import play.api.test.Helpers._
-import java.util._
+import play.api.Play.current
+import java.util.Date
 import java.net._
 
 class ActivitySpec extends Specification {
+  val app = new play.core.StaticApplication(new java.io.File("."))
 
   val activity = Activity("id0001",
                           "title0001",
@@ -21,6 +23,13 @@ class ActivitySpec extends Specification {
   "a activity" should {
     "have id 'id0001'" in {
       activity.id must_== "id0001"
+    }
+  }
+  "model" should {
+    "findAll" in {
+      val result = ActivityDB.findAll
+      println(result)
+      result  must_== List()
     }
   }
 }
