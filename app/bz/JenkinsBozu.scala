@@ -6,7 +6,7 @@ import java.net.URI
 
 class JenkinsBozu extends Bozu {
   def get(params : Map[String, String]) : List[Activity] = {
-    return Http( url("http://dev.codefirst.org/jenkins/rssAll") <> {
+    Http( url("http://dev.codefirst.org/jenkins/rssAll") <> {
       elem => (elem \\ "entry").flatMap(entry => {
         for {
           id        <- (entry \ "link" \ "@href").headOption
