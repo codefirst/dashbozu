@@ -17,7 +17,7 @@ class RedmineBozu extends Bozu {
             val createdAt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss+09:00").
                               parse((entry \ "updated").text)
             val source    = "redmine"
-            val project   = (entry \ "id").text.split(" - ")(0)
+            val project   = (entry \ "title").text.split(" - ")(0)
             val url       = Some(new URI((entry \ "link" \ "@href").text))
             val iconUrl   = None
             Activity(id, title, body, createdAt, source, project, url, iconUrl)
