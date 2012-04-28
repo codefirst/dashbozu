@@ -1,0 +1,54 @@
+body > .main {
+    margin-top: 60px;
+}
+
+body {
+    margin-left: 100px;
+}
+
+img.icon {
+    width: 60px;
+    height: 60px;
+}
+
+
+.activity {
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 10px
+}
+
+.activity:first-child {
+    border-top-width: 0px;
+}
+
+
+
+.activity > div {
+    vertical-align: top;
+    display: inline-block
+}
+
+.activity .icon {
+    padding-right: 10px;
+}
+
+.activities {
+    background-color: white;
+}
+
+.activity .time {
+    color: gray;
+}
+
+.activity .title *{
+    vertical-align: top;
+}
+
+.activity .title img{
+    width:16px;
+    height:16px;
+}
+
+.project {
+    color: gray;
+}

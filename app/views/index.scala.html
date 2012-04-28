@@ -1,7 +1,127 @@
 @(message: String)
 
 @main("Welcome to Play 2.0") {
-    
-    @play20.welcome(message)
-    
+<div class="well activities">
+  <div class="activity">
+    <div class="icon">
+      <img class="icon" src="@routes.Assets.at("images/icons/redmine.png")" />
+    </div>
+    <div class="description">
+      <div class="title">
+        <img src="@routes.Assets.at("images/icons/redmine-shimo.png")" />
+        <a href="https://codefirst.org/redmine/issues/935#change-2142">機能 #935 (担当): 検索機能の高速化</a>
+      </div>
+      <div class="project">
+        AsakusaSatellite
+      </div>
+      <div>
+        igo-ruby + ipa 辞書で実装中<br />
+        実測でDBの使用容量が2倍、検索速度が1.5倍<br />
+        <a class="https://codefirst.org/redmine/users/6">下村 翔</a>
+      </div>
+      <div class="time">
+        2012-04-26 08:45
+      </div>
+    </div>
+  </div>
+
+  <div class="activity">
+    <div class="icon">
+      <img class="icon" src="@routes.Assets.at("images/icons/redmine.png")" />
+    </div>
+    <div class="description">
+      <div class="title">
+        <img src="@routes.Assets.at("images/icons/redmine-shimo.png")" />
+        <a href="https://codefirst.org/redmine/issues/505#change-2141">機能 #505 (却下): Skypeブリッジ</a>
+      </div>
+      <div class="project">
+        AsakusaSatellite
+      </div>
+      <div>
+        Skype はオワコンなのでとりあえず却下します<br />
+        <a class="https://codefirst.org/redmine/users/6">下村 翔</a>
+      </div>
+      <div class="time">
+        2012-04-26 08:41
+      </div>
+    </div>
+  </div>
+
+  <div class="activity">
+    <div class="icon">
+      <img class="icon" src="@routes.Assets.at("images/icons/jenkins.png")" />
+    </div>
+    <div class="description">
+      <div class="title">
+        <a href="https://codefirst.org/redmine/issues/505#change-2141">
+          <img src="@routes.Assets.at("images/icons/jenkins-success.png")" />
+          ビルド #599 (2012/04/25 23:41:54)
+        </a>
+      </div>
+      <div class="project">
+        AsakusaSatellite
+      </div>
+      <div>
+        Changes
+        <ol>
+          <li>Removed: img border on IE refs #1125 (detail / redmineweb)</li>
+        </ol>
+        リモートホスト127.0.0.1が実行(git)
+      </div>
+      <div class="time">
+        2012-04-25 23:41:54
+      </div>
+    </div>
+  </div>
+
+  <div class="activity">
+    <div class="icon">
+      <img class="icon" src="@routes.Assets.at("images/icons/jenkins.png")" />
+    </div>
+    <div class="description">
+      <div class="title">
+        <a href="https://codefirst.org/redmine/issues/505#change-2141">
+          <img src="@routes.Assets.at("images/icons/jenkins-success.png")" />
+          ビルド #65 (2012/04/25 22:18:57)
+        </a>
+      </div>
+      <div class="project">
+        AtsutaKatze
+      </div>
+      <div>
+        Changes
+        <ol>
+          <li>テスト整備 refs #1116 (detail)</li>
+          <li>push/pullに--forceオプションんを追加 refs #1116 (detail)</li.
+        </ol>
+        リモートホスト127.0.0.1が実行(git)
+      </div>
+      <div class="time">
+        2012-04-25 22:18:57
+      </div>
+    </div>
+  </div>
+
+  <div class="activity">
+    <div class="icon">
+      <img class="icon" src="@routes.Assets.at("images/icons/git.png")" />
+    </div>
+    <div class="description">
+      <div class="title">
+        <img src="@routes.Assets.at("images/icons/redmine-shimo.png")" />
+        commit 76b91763
+      </div>
+      <div class="project">
+        AsakusaSatellite
+      </div>
+      <div>
+        bugfix: disable redmine ticket link
+      </div>
+      <div class="time">
+        2012-04-25 22:18:57
+      </div>
+    </div>
+  </div>
+
+</div>
 }
