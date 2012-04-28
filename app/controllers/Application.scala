@@ -18,7 +18,7 @@ object Application extends Controller {
         source = "redmine",
         project = "AsakusaSatellite",
         url = Some(new URI("https://codefirst.org/redmine/issues/935#change-2142")),
-        icon_url = Some(new URI("http://dashbozu.herokuapp.com/assets/images/icons/redmine-shimo.png"))
+        iconUrl = Some(new URI("http://dashbozu.herokuapp.com/assets/images/icons/redmine-shimo.png"))
       ),
       Activity(
         id = "https://codefirst.org/redmine/issues/505#change-2141",
@@ -28,7 +28,7 @@ object Application extends Controller {
         source = "redmine",
         project = "AsakusaSatellite",
         url = Some(new URI("https://codefirst.org/redmine/issues/505#change-2141")),
-        icon_url = Some(new URI("http://dashbozu.herokuapp.com/assets/images/icons/redmine-shimo.png"))
+        iconUrl = Some(new URI("http://dashbozu.herokuapp.com/assets/images/icons/redmine-shimo.png"))
       ),
       Activity(
         id = "https://codefirst.org/redmine/issues/505#change-2141",
@@ -38,7 +38,7 @@ object Application extends Controller {
         source = "jenkins",
         project = "AsakusaSatellite",
         url = Some(new URI("https://codefirst.org/redmine/issues/505#change-2141")),
-        icon_url = Some(new URI("http://dashbozu.herokuapp.com/assets/images/icons/jenkins-success.png"))
+        iconUrl = Some(new URI("http://dashbozu.herokuapp.com/assets/images/icons/jenkins-success.png"))
       ),
       Activity(
         id = "https://codefirst.org/redmine/issues/505#change-2141",
@@ -48,7 +48,7 @@ object Application extends Controller {
         source = "jenkins",
         project = "AtsutaKatze",
         url = Some(new URI("https://codefirst.org/redmine/issues/505#change-2141")),
-        icon_url = Some(new URI("http://dashbozu.herokuapp.com/assets/images/icons/jenkins-success.png"))
+        iconUrl = Some(new URI("http://dashbozu.herokuapp.com/assets/images/icons/jenkins-success.png"))
       ),
       Activity(
         id = "76b91763",
@@ -58,7 +58,7 @@ object Application extends Controller {
         source = "git",
         project = "AsakusaSatellite",
         url = Some(new URI("https://codefirst.org/redmine/issues/505#change-2141")),
-        icon_url = Some(new URI("http://dashbozu.herokuapp.com/assets/images/icons/redmine-shimo.png"))
+        iconUrl = Some(new URI("http://dashbozu.herokuapp.com/assets/images/icons/redmine-shimo.png"))
       )
     )
     Ok(views.html.index(activities))
