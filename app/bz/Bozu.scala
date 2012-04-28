@@ -11,6 +11,8 @@ object Bozu {
     name match {
       case "jenkins" =>
         Some(new JenkinsBozu)
+      case "redmine" =>
+        Some(new RedmineBozu)
       case _ =>
         None
     }
