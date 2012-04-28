@@ -13,14 +13,3 @@ sealed case class Activity(
   url       : Option[URI],
   iconUrl   : Option[URI]
 )
-
-object ActivityProtocol extends DefaultProtocol {
-  implicit val dateFormat : Format[Date] =
-    wrap("date")(_.getTime(), new Date((_ : Long)))
-
-  implicit val uriFormat : Format[URI] =
-    wrap("uri")(_.toString(), new URI(_ : String))
-
-  implicit val format : Format[Activity] =
-    asProduct8("id","title","body","createdAt","source", "project", "url", "iconUrl")(Activity.apply _)(Activity.unapply(_).get)
-}

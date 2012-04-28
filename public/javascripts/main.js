@@ -9,7 +9,12 @@
 
     var pusher = new Pusher('a8a3a7b9b972e4107437');
     var channel = pusher.subscribe('activity');
+    console.log("hi");
     channel.bind('new', function(data) {
         console.log(data);
+        var elem = $(data.html);
+        elem.hide();
+        $(".activities").prepend(elem);
+        elem.fadeIn();
     });
 })();

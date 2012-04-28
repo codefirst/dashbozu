@@ -5,9 +5,8 @@ import play.api.mvc._
 import play.api.Play.current
 import models.Activity
 import java.net.URI
+import dispatch.json._
 
-import sjson.json.JsonSerialization._
-import models.ActivityProtocol._
 
 class ActivityPusher {
   for {
@@ -27,5 +26,12 @@ class ActivityPusher {
     iconUrl = Some(new URI("http://dashbozu.herokuapp.com/assets/images/icons/redmine.png"))
   )
 
-  println(Pusher.triggerPush("activity", "new", tojson(act).toString))
+  val html =
+    views.html.activity(act)
+
+  val json =
+    JsObject(Map(
+      JsString("html") -> JsString(html)
+    ))
+  println(Pusher.triggerPush("activity", "new", json.toString))
 }
