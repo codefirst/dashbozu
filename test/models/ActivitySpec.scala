@@ -39,6 +39,14 @@ class ActivitySpec extends Specification {
     "be inserted" in {
       running(FakeApplication(additionalConfiguration = testDatabase())) {
         ActivityDB.addAll(List(activity)) must_== Some(1)
+        ActivityDB.findAll.toSet must_== Set(activity)
+      }
+    }
+    "be inserted only if not in DB" in {
+      running(FakeApplication(additionalConfiguration = testDatabase())) {
+        val a2 = activity.copy(id="id0002")
+        ActivityDB.addAll(List(activity, a2))// must_== Some(1)
+        ActivityDB.findAll.toSet must_== Set(activity, a2)
       }
     }
   }

@@ -9,6 +9,8 @@ import org.scalaquery.ql.basic.{ BasicTable => Table }
 import org.scalaquery.ql.basic.BasicDriver.Implicit._
 import org.scalaquery.ql.basic.BasicProfile
 import org.scalaquery.ql.basic.BasicInsertInvoker
+import org.scalaquery.ql.extended.PostgresDriver.Implicit._
+import org.scalaquery.ql.extended.H2Driver.Implicit._
 
 import java.net.URI
 import java.util.{ Date => UtilDate }
@@ -66,7 +68,11 @@ object ActivityDB extends Table[Activity]("ACTIVITY") {
     (for (t <- this) yield t.*).list
   }
   def addAll(as : List[Activity]) : Option[Int] = db.withSession { implicit db : Session =>
-    ActivityDB.insertAll(as.toSeq:_*)
+    val newAs = as.filter { a =>
+      (for (t <- this if t.id == a.id) yield t.*).take(1).list.length == 0
+    }
+    println("newly inserting (" + newAs.length + ")...: " + newAs)
+    ActivityDB.insertAll(newAs.toSeq:_*)
   }
 }
 
