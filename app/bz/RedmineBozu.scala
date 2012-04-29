@@ -9,9 +9,8 @@ import java.net.URI
 class RedmineBozu extends Bozu {
   def get(params : Map[String, Seq[String]]) : Seq[Activity] = {
     for {
-      urlseq    <- params.get("url").toSeq
-      urlstring <- urlseq.headOption.toSeq
-      activity <- Http( url(urlstring) <> {
+      urlstr <- params.get("url").toSeq.flatMap(_.headOption)
+      activity <- Http( url(urlstr) <> {
         elem => (elem \\ "entry").map(entry => {
           val id        = (entry \ "id").text
           val title     = (entry \ "title").text
