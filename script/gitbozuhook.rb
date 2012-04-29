@@ -37,7 +37,7 @@ module Net
   end
 end
 
-gitDir = File.expand_path('../../.git', __FILE__)
+gitDir = File.expand_path('../../', __FILE__)
 projectName = File::basename(gitDir, ".git")
 
 logs = (`git --git-dir=#{gitDir} log -z --pretty=format:"%H<|>%ci<|>%s<|>%an<|>%ae" #{oldrev}..#{newrev}`).split("\0").map{|line| line.split "<|>"}
