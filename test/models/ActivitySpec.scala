@@ -27,9 +27,10 @@ class ActivitySpec extends Specification {
   }
   "model" should {
     "findAll" in {
-      val result = ActivityDB.findAll
-      println(result)
-      result  must_== List()
+      ActivityDB.findAll must_== List()
+    }
+    "be inserted" in {
+      ActivityDB.addAll(List(activity)) must_== Some(1)
     }
   }
 }

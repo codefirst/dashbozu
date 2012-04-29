@@ -8,12 +8,13 @@ import org.scalaquery.ql.TypeMapper._
 import org.scalaquery.ql.basic.{ BasicTable => Table }
 import org.scalaquery.ql.basic.BasicDriver.Implicit._
 import org.scalaquery.ql.basic.BasicProfile
+import org.scalaquery.ql.basic.BasicInsertInvoker
 
 import java.net.URI
 import java.util.{ Date => UtilDate }
 import java.sql.{ Date => SQLDate }
 
-object ActivityDB extends Table[(String, String, String, UtilDate, String, String, Option[URI], Option[URI])]("activity") {
+object ActivityDB extends Table[Activity]("activity") {
   def wrap[S,T](delegate : TypeMapperDelegate[S])(apply : S => T)(unapply : T => S) : TypeMapperDelegate[T] = {
     new TypeMapperDelegate[T] {
       def zero :T =
@@ -36,7 +37,7 @@ object ActivityDB extends Table[(String, String, String, UtilDate, String, Strin
 
       override def valueToSQLLiteral(v: T) =
         delegate.valueToSQLLiteral(unapply(v))
-  }
+    }
   }
 
   implicit object URITypeMapper extends BaseTypeMapper[URI] {
@@ -57,13 +58,15 @@ object ActivityDB extends Table[(String, String, String, UtilDate, String, Strin
   def project   = column[String]("project", O.NotNull)
   def url       = column[Option[URI]]("url")
   def iconUrl   = column[Option[URI]]("icon_url")
-  def * = id~title~body~createdAt~source~project~url~iconUrl
+  def * = id~title~body~createdAt~source~project~url~iconUrl <> (Activity, Activity.unapply _)
 
   val db = Database.forDataSource(DB.getDataSource())
   
   def findAll : List[Activity] = db.withSession { implicit db : Session =>
-    val results = (for (t <- this) yield t.*).list
-    results.map{case (id, title, body, createdAt, source, project, url, iconUrl) => Activity(id, title, body, createdAt, source, project, url, iconUrl)}
+    (for (t <- this) yield t.*).list
+  }
+  def addAll(as : List[Activity]) : Option[Int] = db.withSession { implicit db : Session =>
+    ActivityDB.insertAll(as.toSeq:_*)
   }
 }
 
