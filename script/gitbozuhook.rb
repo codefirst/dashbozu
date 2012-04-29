@@ -1,4 +1,8 @@
 #!/usr/bin/env ruby
+#
+# USAGE: 
+#  gitbozuhook.rb oldrev newrev
+#
 
 require "open-uri"
 require "net/http"
