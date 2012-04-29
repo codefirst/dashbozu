@@ -44,7 +44,6 @@ object ActivityDB extends Table[Activity]("ACTIVITY") with Subscribe[Activity] {
   }
 
   def addAll(as : Seq[Activity]) : Option[Int] = db.withSession { implicit db : Session =>
-    println(as)
     val ys = ActivityDB.where( x => x.id inSet as.map(_.id)).map(_.id).list
     val zs = as filterNot ( (a : Activity) => ys.contains(a.id) )
     tee(ActivityDB.insertAll(zs:_*)) { _ =>
