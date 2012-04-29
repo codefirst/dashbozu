@@ -12,7 +12,7 @@ import org.scalaquery.ql.basic.BasicInsertInvoker
 
 import java.net.URI
 import java.util.{ Date => UtilDate }
-import java.sql.{ Date => SQLDate }
+import java.sql.{ Timestamp => SQLTimestamp }
 
 object ActivityDB extends Table[Activity]("ACTIVITY") {
   def wrap[S,T](delegate : TypeMapperDelegate[S])(apply : S => T)(unapply : T => S) : TypeMapperDelegate[T] = {
@@ -47,7 +47,7 @@ object ActivityDB extends Table[Activity]("ACTIVITY") {
 
   implicit object JavaDateTypeMapper extends BaseTypeMapper[UtilDate] {
     def apply(profile: BasicProfile) =
-      wrap[SQLDate,UtilDate](profile.typeMapperDelegates.dateTypeMapperDelegate)((date:SQLDate) => date)((d:UtilDate) => new SQLDate(d.getTime()))
+      wrap[SQLTimestamp,UtilDate](profile.typeMapperDelegates.timestampTypeMapperDelegate)((date:SQLTimestamp) => new UtilDate(date.getTime))((d:UtilDate) => new SQLTimestamp(d.getTime))
   }
 
   def id        = column[String]("ID", O.PrimaryKey)
