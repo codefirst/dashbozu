@@ -65,7 +65,7 @@ object ActivityDB extends Table[Activity]("ACTIVITY") {
   def db = Database.forDataSource(DB.getDataSource())
 
   def findAll : List[Activity] = db.withSession { implicit db : Session =>
-    (for (t <- this) yield t.*).list
+    (for (t <- this; _ <- Query orderBy Ordering.Desc(t.createdAt)) yield t.*).list
   }
   def addAll(as : List[Activity]) : Option[Int] = db.withSession { implicit db : Session =>
     val ys = ActivityDB.where( x => x.id inSet as.map(_.id)).map(_.id).list

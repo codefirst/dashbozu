@@ -50,5 +50,14 @@ class ActivitySpec extends Specification {
         ActivityDB.findAll.toSet must_== Set(activity, a2)
       }
     }
+    "findAll ordered by createdAt desc" in {
+      running(FakeApplication(additionalConfiguration = testDatabase())) {
+        val a1 = activity.copy(id="id0001",createdAt=new Date())
+        val a2 = activity.copy(id="id0002",createdAt=new Date(a1.createdAt.getTime - 1000))
+        val a3 = activity.copy(id="id0003",createdAt=new Date(a1.createdAt.getTime + 1000))
+        ActivityDB.addAll(List(a1,a2,a3))
+        ActivityDB.findAll must_== List(a3,a1,a2)
+      }
+    }
   }
 }
