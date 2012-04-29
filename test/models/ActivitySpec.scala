@@ -27,7 +27,7 @@ class ActivitySpec extends Specification {
   def testDatabase(name: String = "default"): Map[String, String] = {
     Map(
       ("db." + name + ".driver") -> "org.h2.Driver",
-      ("db." + name + ".url") -> ("jdbc:h2:mem:play-test;MODE=PostgreSQL;IGNORECASE=true")
+      ("db." + name + ".url") -> ("jdbc:h2:mem:play-test-"+scala.util.Random.nextInt+";MODE=PostgreSQL;IGNORECASE=true")
     )
   }
   "model" should {
