@@ -9,9 +9,10 @@ import java.net.URI
 class JenkinsBozu extends Bozu {
   def get(params : Map[String, Seq[String]]) : Seq[Activity] = {
     for {
-      urlseq    <- params.get("url").toSeq
-      urlstring <- urlseq.headOption.toSeq
-      activity <- Http( url(urlstring) <> { elem => {
+      domain   <- params.get("url").toSeq.flatMap(urlseq => urlseq.headOption)
+      project  <- params.get("project").toSeq.flatMap(prjseq => prjseq.headOption)
+      apiurl   =  url("%s/job/%s/api/xml?depth=2".format(domain, project))
+      activity <- Http( apiurl <> { elem => {
         (elem \\ "build").map(build => {
           val projectName = (elem \\ "displayName").text
 
