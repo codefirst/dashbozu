@@ -10,7 +10,7 @@ object Application extends Controller {
 
   def index = Action {
     val activities =
-      ActivityDB.findAll.sortWith((x,y) => x.createdAt.getTime > y.createdAt.getTime)
+      ActivityDB.findAll
     Ok(views.html.index(activities.toList))
   }
 
