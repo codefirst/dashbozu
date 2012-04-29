@@ -34,10 +34,19 @@ object ActivityDB extends Table[Activity]("ACTIVITY") with Subscribe[Activity] {
   def findAll : List[Activity] = db.withSession { implicit db : Session =>
     (for (t <- this; _ <- Query orderBy Ordering.Desc(t.createdAt)) yield t.*).list
   }
-  def addAll(as : List[Activity]) : Option[Int] = db.withSession { implicit db : Session =>
+
+  def tee[A]( x : A)(action : A => Unit) : A = {
+    action(x)
+    x
+  }
+
+  def addAll(as : Seq[Activity]) : Option[Int] = db.withSession { implicit db : Session =>
+    println(as)
     val ys = ActivityDB.where( x => x.id inSet as.map(_.id)).map(_.id).list
     val zs = as filterNot ( (a : Activity) => ys.contains(a.id) )
-    ActivityDB.insertAll(zs:_*)
+    tee(ActivityDB.insertAll(zs:_*)) { _ =>
+      zs.foreach( z => notify(z))
+    }
   }
 }
 
