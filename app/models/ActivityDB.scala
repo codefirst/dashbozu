@@ -68,11 +68,9 @@ object ActivityDB extends Table[Activity]("ACTIVITY") {
     (for (t <- this) yield t.*).list
   }
   def addAll(as : List[Activity]) : Option[Int] = db.withSession { implicit db : Session =>
-    val newAs = as.filter { a =>
-      (for (t <- this if t.id == a.id) yield t.*).take(1).list.length == 0
-    }
-    println("newly inserting (" + newAs.length + ")...: " + newAs)
-    ActivityDB.insertAll(newAs.toSeq:_*)
+    val ys = ActivityDB.where( x => x.id inSet as.map(_.id)).map(_.id).list
+    val zs = as filterNot ( (a : Activity) => ys.contains(a.id) )
+    ActivityDB.insertAll(zs:_*)
   }
 }
 
