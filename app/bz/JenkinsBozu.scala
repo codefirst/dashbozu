@@ -12,8 +12,9 @@ class JenkinsBozu extends Bozu {
       Http( url(urlstring) <> {
         elem => (elem \\ "build").map(build => {
             val id        = (build \ "url").text
-            val title     = "Job #%s (%s)".format((build \ "number").text,
-                                                  (build \ "result").text)
+            val title     = "%s #%s (%s)".format((elem \\ "displayName").text,
+                                                 (build \ "number").text,
+                                                 (build \ "result").text)
             val body      = (build \ "changeSet" \ "item" \ "comment").text
             val createdAt = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").parse(
                               (build \ "id").text)
