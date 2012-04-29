@@ -11,16 +11,23 @@ img.icon {
 
 .activity {
     border-top: 1px solid rgba(0, 0, 0, 0.05);
-    padding: 10px
+    padding: 10px;
 }
 
 .activity:first-child {
     border-top-width: 0px;
 }
 
-.activity > div {
-    vertical-align: top;
-    display: inline-block
+.activity > .icon {
+    width: 60px;
+    height: 60px;
+    margin-left: 10px;
+    margin-right: 10px;
+    float: left;
+}
+.activity .description {
+    float: left;
+    width: 460px;
 }
 
 .activity .icon {
@@ -28,7 +35,9 @@ img.icon {
 }
 
 .activities {
-    background-color: white;
+    background-color: #fff;
+    padding-top: 9px;
+    padding-bottom: 9px;
 }
 
 .activity .time {
@@ -51,19 +60,35 @@ img.icon {
 footer {
     text-align: center;
     color: #999;
-    margin-top: 10px;
     margin-bottom: 20px;
 }
 
 /* iPhone */
 @media only screen and (max-device-width: 480px) {
     body > .container {
-        margin-top: 30px;
+        margin-top: 20px;
     }
     img.icon {
         width: 36px;
         height: 36px;
         margin-bottom: 3px;
+    }
+    .activities {
+        padding: 2px;
+    }
+    .activity > .icon {
+        width: 40px;
+        height: 40px;
+        margin-left: 0px;
+        margin-right: 0px;
+        float: left;
+    }
+    .activity .description {
+        width: 200px;
+        float: left;
+    }
+    footer span {
+        display: block;
     }
 }
 
