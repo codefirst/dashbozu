@@ -14,6 +14,7 @@ import org.scalaquery.ql.extended.H2Driver.Implicit._
 
 import java.net.URI
 import java.util.{ Date => UtilDate }
+import java.util.TimeZone
 import java.sql.{ Timestamp => SQLTimestamp }
 
 
@@ -56,6 +57,6 @@ object ActivityMapper {
 
   implicit object JavaDateTypeMapper extends BaseTypeMapper[UtilDate] {
     def apply(profile: BasicProfile) =
-      wrap[SQLTimestamp,UtilDate](profile.typeMapperDelegates.timestampTypeMapperDelegate)((date:SQLTimestamp) => new UtilDate(date.getTime))((d:UtilDate) => new SQLTimestamp(d.getTime))
+      wrap[SQLTimestamp,UtilDate](profile.typeMapperDelegates.timestampTypeMapperDelegate)((date:SQLTimestamp) => new UtilDate(date.getTime + TimeZone.getDefault.getRawOffset))((d:UtilDate) => new SQLTimestamp(d.getTime - TimeZone.getDefault.getRawOffset))
   }
 }
