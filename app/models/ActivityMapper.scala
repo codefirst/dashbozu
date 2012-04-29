@@ -45,7 +45,13 @@ object ActivityMapper {
 
   implicit object URITypeMapper extends BaseTypeMapper[URI] {
     def apply(profile: BasicProfile) =
-      wrap(profile.typeMapperDelegates.stringTypeMapperDelegate)(new URI(_))(_.toString)
+      wrap(profile.typeMapperDelegates.stringTypeMapperDelegate){ s =>
+        if(s == null) null
+        else new URI(s)
+      } { u =>
+        if(u == null) null
+        else u.toString
+      }
   }
 
   implicit object JavaDateTypeMapper extends BaseTypeMapper[UtilDate] {
