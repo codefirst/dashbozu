@@ -12,7 +12,7 @@ class GitBozu extends Bozu {
     for {
       commit <- (XML.loadString(params("commits").head) \ "commit").toList
     } yield Activity((commit \ "id").text,
-                     (commit \ "title").text,
+                     "commit: "+((commit \ "id").text).take(8),
                      (commit \ "body").text,
                      new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((commit \ "date").text),
                      "git",

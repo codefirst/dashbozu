@@ -43,7 +43,7 @@ logs = (`git --git-dir=#{gitDir} log -z --pretty=format:"%H<|>%ci<|>%s" #{oldrev
 
 data = "<commits>" + logs.map{|log|
 <<END
-<commit><id>#{log[0]}</id><title>commit: #{log[0]}</title><body>#{log[2]}</body><date>#{log[1]}</date><project>#{projectName}</project></commit>
+<commit><id>#{log[0]}</id><body>#{log[2]}</body><date>#{log[1]}</date><project>#{projectName}</project></commit>
 END
 }.join + "</commits>"
 
