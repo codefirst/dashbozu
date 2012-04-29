@@ -20,7 +20,7 @@ class RedmineBozu extends Bozu {
           val source    = "redmine"
           val project   = (entry \ "title").text.split(" - ")(0)
           val url       = Some(new URI((entry \ "link" \ "@href").text))
-          val iconUrl   = None
+          val iconUrl   = Some(new URI(Bozu.getIcon((entry \ "author" \ "email").text)))
           Activity(id, title, body, createdAt, source, project, url, iconUrl)
         })
       })
