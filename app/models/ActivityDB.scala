@@ -12,7 +12,6 @@ import org.scalaquery.ql.basic.BasicProfile
 import java.net.URI
 import java.util.{ Date => UtilDate }
 import java.sql.{ Date => SQLDate }
-import sjson.json._
 
 object ActivityDB extends Table[(String, String, String, UtilDate, String, String, Option[URI], Option[URI])]("activity") {
   def wrap[S,T](delegate : TypeMapperDelegate[S])(apply : S => T)(unapply : T => S) : TypeMapperDelegate[T] = {
