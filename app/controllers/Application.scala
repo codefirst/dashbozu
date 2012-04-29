@@ -18,28 +18,26 @@ object Application extends Controller {
     ActivityPusher.publish(x)
   }
 
+  def hook(name : String, params : Map[String, Seq[String]]) =
+    Bozu(name) match {
+      case Some(bz) =>
+        ActivityDB.addAll(bz.get(params))
+      case None =>
+        throw new RuntimeException("no such bozu: " + name)
+    }
+
   def hookPost(name : String) = Action { request =>
-    Bozu(name) map { bz =>
-      request.body match {
-        case AnyContentAsFormUrlEncoded(body) => Bozu(name) map { bz =>
-          ActivityDB.addAll(bz.get(body))
-        }
-        case _ => {}
-      }
-      Ok("ok")
-    } getOrElse {
-      BadRequest("no such hook: " + name)
+    request.body match {
+      case AnyContentAsFormUrlEncoded(body) =>
+        hook(name, body)
+        Ok("ok")
+      case _ =>
+        BadRequest("no such hook: " + name)
     }
   }
 
   def hookGet(name : String) = Action { request =>
-    Bozu(name) map { bz =>
-      println(bz)
-      println(bz.get(request.queryString))
-      ActivityDB.addAll(bz.get(request.queryString))
-      Ok("ok")
-    } getOrElse {
-      BadRequest("no such hook: " + name)
-    }
+    hook(name, request.queryString)
+    Ok("ok")
   }
 }
