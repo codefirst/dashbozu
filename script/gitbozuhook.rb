@@ -1,8 +1,13 @@
 #!/usr/bin/env ruby
 #
 # USAGE: 
-#  gitbozuhook.rb oldrev newrev
+#  gitbozuhook.rb oldrev newrev refname posturl
 #
+
+oldrev  = ARGV[0]
+newrev  = ARGV[1]
+refname = ARGV[2].split("/").last rescue ""
+posturl = ARGV[3]
 
 require "open-uri"
 require "net/http"
@@ -32,19 +37,15 @@ module Net
   end
 end
 
-oldrev  = ARGV[0]
-newrev  = ARGV[1]
-refname = ARGV[2]
-
-gitDir = File.expand_path('../../', __FILE__)
+gitDir = File.expand_path('../../.git', __FILE__)
 projectName = File::basename(gitDir, ".git")
 
-logs = (`git --git-dir=#{gitDir} log -z --pretty=format:"%H<|>%ci<|>%s" #{oldrev}..#{newrev}`).split("\0").map{|line| line.split "<|>"}
+logs = (`git --git-dir=#{gitDir} log -z --pretty=format:"%H<|>%ci<|>%s<|>%an<|>%ae" #{oldrev}..#{newrev}`).split("\0").map{|line| line.split "<|>"}
 
-data = "<commits>" + logs.map{|log|
+data = "<commits>" + logs.map{|hash,date,msg,author,email|
 <<END
-<commit><id>#{log[0]}</id><body>#{log[2]}</body><date>#{log[1]}</date><project>#{projectName}</project></commit>
+<commit><id>#{hash}</id><refname>#{refname}</refname><author>#{author}</author><email>#{email}</email><body>#{msg}</body><date>#{date}</date><project>#{projectName}</project></commit>
 END
 }.join + "</commits>"
 
-open("http://dashbozu.herokuapp.com/hook/git", {"postdata"=>"commits=#{data}"}){|_|}
+open(posturl, {"postdata"=>"commits=#{data}"}){|_|}
