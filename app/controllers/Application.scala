@@ -10,7 +10,7 @@ object Application extends Controller {
 
   def index = Action {
     val activities =
-      (((new JenkinsBozu).get(Map(("url",Seq("http://dev.codefirst.org/jenkins/rssAll"))))) ++
+      (((new JenkinsBozu).get(Map(("url",Seq("http://dev.codefirst.org/jenkins/job/asakusa-satellite/api/xml?depth=2"))))) ++
       ((new RedmineBozu).get(Map(("url",Seq("https://codefirst.org/redmine/activity.atom?key=sSZ7xhAzqkKeaTHiicSOwuPI5DvUFGZ1smQRQQpC")))))).sortWith((x,y) => x.createdAt.getTime > y.createdAt.getTime)
       
     // val activities = List(

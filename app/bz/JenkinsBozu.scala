@@ -10,18 +10,19 @@ class JenkinsBozu extends Bozu {
   def get(params : Map[String, Seq[String]]) : List[Activity] = {
     params("url").toList.flatMap(urlstring =>
       Http( url(urlstring) <> {
-        elem => (elem \\ "entry").flatMap(entry => {
-          for {
-            id        <- (entry \ "link" \ "@href").headOption
-            title     = (entry \ "title").text
-            body      = ""
-            createdAt = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").
-                          parse(((entry \ "id").text.split(":"))(3))
-            source    = "jenkins"
-            project   = (entry \ "id").text.split(":")(2)
-            url       = Some(new URI(id.text))
-            iconUrl   = None
-          } yield Activity(id.text, title, body, createdAt, source, project, url, iconUrl)
+        elem => (elem \\ "build").map(build => {
+            val id        = (build \ "url").text
+            val title     = "Job #%s (%s)".format((build \ "number").text,
+                                                  (build \ "result").text)
+            val body      = (build \ "changeSet" \ "item" \ "comment").text
+            val createdAt = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").parse(
+                              (build \ "id").text)
+            val source    = "jenkins"
+            val project   = (elem \\ "displayName").text
+            val url       = Some(new URI(id))
+            val iconUrl   = Some(new URI("/assets/images/icons/jenkins/%s.png".format(
+                              (build \ "result").text.toLowerCase)))
+            Activity(id, title, body, createdAt, source, project, url, iconUrl)
         }).toList
       }))
   }
