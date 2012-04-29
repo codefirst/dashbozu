@@ -1,5 +1,6 @@
 package models
 
+import play.api._
 import play.api.db._
 import play.api.Play.current
 import org.scalaquery.session._
@@ -31,8 +32,10 @@ object ActivityDB extends Table[Activity]("ACTIVITY") with Subscribe[Activity] {
 
   def db = Database.forDataSource(DB.getDataSource())
 
-  def findAll : List[Activity] = db.withSession { implicit db : Session =>
-    (for (t <- this; _ <- Query orderBy Ordering.Desc(t.createdAt)) yield t.*).list
+  def findAll(limit:Int=0) : List[Activity] = db.withSession { implicit db : Session =>
+    val l = if (limit == 0) Play.configuration.getInt("activity.fetch_limit").getOrElse(20)
+            else limit
+    (for (t <- this; _ <- Query orderBy Ordering.Desc(t.createdAt)) yield t.*).take(l).list
   }
 
   def tee[A]( x : A)(action : A => Unit) : A = {

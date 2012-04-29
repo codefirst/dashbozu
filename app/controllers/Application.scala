@@ -10,7 +10,7 @@ object Application extends Controller {
 
   def index = Action {
     val activities =
-      ActivityDB.findAll
+      ActivityDB.findAll()
     Ok(views.html.index(activities.toList))
   }
 
