@@ -5,6 +5,7 @@
 <html>
   <head>
     <title>@title | Dashbozu</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' name='viewport'>
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap-responsive.css")">
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
@@ -40,15 +41,17 @@
       </div>
     </div>
 
-    <div class="row main">
-      <div class="span2">
-        <ul class="nav nav-tabs nav-stacked">
-          <li class="active"><a href="#">Activity</a></li>
-          <li><a href="#">Following</a></li>
-        </ul>
-      </div>
-      <div class="span9 container">
+    <div class="container">
+      <div class="row">
+        <div class="span2">
+          <ul class="nav nav-tabs nav-stacked">
+            <li class="active"><a href="#">Activity</a></li>
+            <li><a href="#">Following</a></li>
+          </ul>
+        </div>
+        <div class="span10 container">
         @content
+        </div>
       </div>
     </div>
 
