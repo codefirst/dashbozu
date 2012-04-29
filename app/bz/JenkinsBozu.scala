@@ -5,6 +5,8 @@ import dispatch._
 import models._
 import java.text.SimpleDateFormat
 import java.net.URI
+import play.api.Play
+import play.api.Play.current
 
 class JenkinsBozu extends Bozu {
   def get(params : Map[String, Seq[String]]) : Seq[Activity] = {
@@ -26,8 +28,9 @@ class JenkinsBozu extends Bozu {
           val source    = "jenkins"
           val project   = projectName
           val url       = Some(new URI(id))
-          val iconUrl   = Some(new URI("/assets/images/icons/jenkins/%s.png".format(
-                            (build \ "result").text.toLowerCase)))
+          val iconUrl   =
+            Some(new URI(controllers.routes.Assets.at("images/icons/jenkins/%s.png".format(
+              (build \ "result").text.toLowerCase)).url))
           Activity(id, title, body, createdAt, source, project, url, iconUrl)
         })
       }})
