@@ -3,7 +3,7 @@ package bz
 import models._
 
 trait Bozu {
-  def get(params : Map[String, Seq[String]]) : List[Activity]
+  def get(params : Map[String, Seq[String]]) : Seq[Activity]
 }
 
 object Bozu {

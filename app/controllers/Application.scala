@@ -66,7 +66,7 @@ object Application extends Controller {
     //     iconUrl = Some(new URI("http://dashbozu.herokuapp.com/assets/images/icons/redmine-shimo.png"))
     //   )
     // )
-    Ok(views.html.index(activities))
+    Ok(views.html.index(activities.toList))
   }
 
   def hook(name : String) = Action { request =>
