@@ -2,20 +2,20 @@
 
 # --- !Ups
 
-create table activity (
-  id         text primary key,
-  title      text not null,
-  body       text not null,
-  created_at  timestamp not null,
-  source     varchar(255) not null,
-  project    text not null,
-  url        text,
-  icon_url    text
+create table "ACTIVITY" (
+  "ID"         varchar(255) primary key,
+  "TITLE"      text not null,
+  "BODY"       text not null,
+  "CREATED_AT" timestamp not null,
+  "SOURCE"     varchar(255) not null,
+  "PROJECT"    text not null,
+  "URL"        text,
+  "ICON_URL"   text
 );
 
-create index ix_activity_created_at on activity (created_at);
+create index ix_activity_created_at on "ACTIVITY" ("CREATED_AT");
 
 # --- !Downs
 
-drop table if exists activity;
+drop table if exists "ACTIVITY";
 

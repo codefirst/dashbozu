@@ -14,7 +14,7 @@ import java.net.URI
 import java.util.{ Date => UtilDate }
 import java.sql.{ Date => SQLDate }
 
-object ActivityDB extends Table[Activity]("activity") {
+object ActivityDB extends Table[Activity]("ACTIVITY") {
   def wrap[S,T](delegate : TypeMapperDelegate[S])(apply : S => T)(unapply : T => S) : TypeMapperDelegate[T] = {
     new TypeMapperDelegate[T] {
       def zero :T =
@@ -50,18 +50,18 @@ object ActivityDB extends Table[Activity]("activity") {
       wrap[SQLDate,UtilDate](profile.typeMapperDelegates.dateTypeMapperDelegate)((date:SQLDate) => date)((d:UtilDate) => new SQLDate(d.getTime()))
   }
 
-  def id        = column[String]("id", O.PrimaryKey)
-  def title     = column[String]("title", O.NotNull)
-  def body      = column[String]("body", O.NotNull)
-  def createdAt = column[UtilDate]("created_at", O.NotNull)
-  def source    = column[String]("source", O.NotNull)
-  def project   = column[String]("project", O.NotNull)
-  def url       = column[Option[URI]]("url")
-  def iconUrl   = column[Option[URI]]("icon_url")
+  def id        = column[String]("ID", O.PrimaryKey)
+  def title     = column[String]("TITLE", O.NotNull)
+  def body      = column[String]("BODY", O.NotNull)
+  def createdAt = column[UtilDate]("CREATED_AT", O.NotNull)
+  def source    = column[String]("SOURCE", O.NotNull)
+  def project   = column[String]("PROJECT", O.NotNull)
+  def url       = column[Option[URI]]("URL")
+  def iconUrl   = column[Option[URI]]("ICON_URL")
   def * = id~title~body~createdAt~source~project~url~iconUrl <> (Activity, Activity.unapply _)
 
-  val db = Database.forDataSource(DB.getDataSource())
-  
+  def db = Database.forDataSource(DB.getDataSource())
+
   def findAll : List[Activity] = db.withSession { implicit db : Session =>
     (for (t <- this) yield t.*).list
   }
