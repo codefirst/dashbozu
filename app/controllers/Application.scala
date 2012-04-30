@@ -14,10 +14,6 @@ object Application extends Controller {
     Ok(views.html.index(activities.toList))
   }
 
-  ActivityDB.subscribe { x =>
-    ActivityPusher.publish(x)
-  }
-
   def hook(name : String, params : Map[String, Seq[String]]) =
     Bozu(name) match {
       case Some(bz) =>
@@ -39,5 +35,10 @@ object Application extends Controller {
   def hookGet(name : String) = Action { request =>
     hook(name, request.queryString)
     Ok("ok")
+  }
+
+  ActivityDB.subscribe { x =>
+    ActivityPusher.publish(x)
+    Boxcar.publish(x)
   }
 }
