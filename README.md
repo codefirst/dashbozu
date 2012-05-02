@@ -94,7 +94,7 @@ Install psot script plugin:
 Update ``$RAILS_ROOT/vender/plugins/redmine_post_script/bin/post_script.rb``:
 
     require 'open-uri'
-    open("http://dashbozu.herokuapp.com/hook/redmine?url=https://codefirst.org/redmine/activity.atom?key=[API キー]") {|_|}
+    open("http://dashbozu.herokuapp.com/hook/redmine?url=https://codefirst.org/redmine/activity.atom?key=[API key]") {|_|}
 
 Other tpis
 -----------------------
