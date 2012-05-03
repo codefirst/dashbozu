@@ -32,8 +32,8 @@ sealed case class Activity (
   createdAt : Date,
   source    : String,
   project   : String,
+  url       : Option[URI],
   iconUrl   : Option[URI],
-  url       : Option[URI] = None,
   status    : Status = Info,
   author    : Option[String]
 )
