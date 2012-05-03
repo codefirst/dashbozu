@@ -21,7 +21,18 @@ class RedmineBozu extends Bozu {
           val project   = (entry \ "title").text.split(" - ")(0)
           val url       = Some(new URI((entry \ "link" \ "@href").text))
           val iconUrl   = Some(new URI(Bozu.getIcon((entry \ "author" \ "email").text)))
-          Activity(id, title, body, createdAt, source, project, url, iconUrl)
+          Activity(
+            id        = id,
+            title     = title,
+            body      = body,
+            createdAt = createdAt,
+            source    = source,
+            project   = project,
+            url       = url,
+            iconUrl   = iconUrl,
+            status    = Info,
+            author    = Some((entry \ "author" \ "email").text)
+          )
         })
       })
     } yield activity

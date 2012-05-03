@@ -28,10 +28,32 @@ class JenkinsBozu extends Bozu {
           val source    = "jenkins"
           val project   = projectName
           val url       = Some(new URI(id))
+          val result =
+            (build \ "result").text.toLowerCase
           val iconUrl   =
-            Some(new URI(controllers.routes.Assets.at("images/icons/jenkins/%s.png".format(
-              (build \ "result").text.toLowerCase)).url))
-          Activity(id, title, body, createdAt, source, project, url, iconUrl)
+            Some(new URI(controllers.routes.Assets.at("images/icons/jenkins/%s.png".format(result)).url))
+          val status =
+            result match {
+              case "aborted" | "failure" =>
+                Error
+              case "success" =>
+                Success
+              case "unstable" =>
+                Warn
+              case _ =>
+                Info
+            }
+          Activity(
+            id      = id,
+            title   = title,
+            body    = body,
+            createdAt = createdAt,
+            source  = source,
+            project = project,
+            url     = url,
+            iconUrl = iconUrl,
+            author  = None,
+            status  = status)
         })
       }})
     } yield activity

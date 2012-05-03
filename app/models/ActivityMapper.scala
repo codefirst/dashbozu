@@ -17,7 +17,6 @@ import java.util.{ Date => UtilDate }
 import java.util.TimeZone
 import java.sql.{ Timestamp => SQLTimestamp }
 
-
 object ActivityMapper {
   def wrap[S,T](delegate : TypeMapperDelegate[S])(apply : S => T)(unapply : T => S) : TypeMapperDelegate[T] = {
     new TypeMapperDelegate[T] {
@@ -58,5 +57,18 @@ object ActivityMapper {
   implicit object JavaDateTypeMapper extends BaseTypeMapper[UtilDate] {
     def apply(profile: BasicProfile) =
       wrap[SQLTimestamp,UtilDate](profile.typeMapperDelegates.timestampTypeMapperDelegate)((date:SQLTimestamp) => new UtilDate(date.getTime + TimeZone.getDefault.getRawOffset))((d:UtilDate) => new SQLTimestamp(d.getTime - TimeZone.getDefault.getRawOffset))
+  }
+
+  implicit object StatusTypeMapper extends BaseTypeMapper[Status] {
+    def apply(profile: BasicProfile) =
+      wrap[String,Status](profile.typeMapperDelegates.stringTypeMapperDelegate){ s =>
+        if(s == null)
+          null
+        else
+          Status(s)
+      } { s =>
+        if(s == null) null
+        else s.toString
+      }
   }
 }

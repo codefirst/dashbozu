@@ -53,7 +53,7 @@ img.icon {
     height:16px;
 }
 
-.project {
+.info {
     color: gray;
 }
 
@@ -92,3 +92,15 @@ footer {
     }
 }
 
+
+.status-success{
+    background-color: #dff0d8;
+}
+
+.status-error{
+    background-color: #f2dede;
+}
+
+.status-warn{
+    background-color: #fcf8e3;
+}

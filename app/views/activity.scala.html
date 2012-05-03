@@ -1,5 +1,5 @@
 @(activity: models.Activity)
-<div class="activity row">
+<div class="activity row status-@activity.status.toString.toLowerCase">
   <div class="icon">
     <img class="icon" src="@routes.Assets.at("images/icons/" + activity.source + ".png")" />
   </div>
@@ -8,10 +8,16 @@
       <img src="@activity.iconUrl" />
       <a href="@activity.url">@activity.title</a>
     </div>
-    <div class="project">
-      @activity.project
+    <div class="info">
+      by
+      <span class="author">
+        @activity.author.getOrElse("nobody")
+      </span>
+      | <span class="project">
+        @activity.project
+      </span>
     </div>
-    <div>
+    <div class="body">
       @Html(activity.body)
     </div>
     <div class="time">

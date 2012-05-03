@@ -28,7 +28,9 @@ object ActivityDB extends Table[Activity]("ACTIVITY") with Subscribe[Activity] {
   def project   = column[String]("PROJECT", O.NotNull)
   def url       = column[Option[URI]]("URL")
   def iconUrl   = column[Option[URI]]("ICON_URL")
-  def * = id~title~body~createdAt~source~project~url~iconUrl <> (Activity, Activity.unapply _)
+  def status   = column[Status]("STATUS")
+  def author   = column[Option[String]]("AUTHOR")
+  def * = id~title~body~createdAt~source~project~url~iconUrl~status~author <> (Activity, Activity.unapply _)
 
   def db = Database.forDataSource(DB.getDataSource())
 

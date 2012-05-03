@@ -6,22 +6,26 @@ import dispatch.json._
 import models.{ActivityDB, Activity}
 
 object ActivityPusher {
-  for {
-    id <- Play.configuration.getString("pusher.id")
-    key <- Play.configuration.getString("pusher.key")
-    secret <- Play.configuration.getString("pusher.secret")
-  } {
-    Pusher.init(id, key, secret)
+  if(Play.configuration.getBoolean("pusher.enable") getOrElse { false } ) {
+    for {
+      id <- Play.configuration.getString("pusher.id")
+      key <- Play.configuration.getString("pusher.key")
+      secret <- Play.configuration.getString("pusher.secret")
+    } {
+      Pusher.init(id, key, secret)
+    }
   }
 
   def publish(activity : Activity) = {
-    val html =
-      views.html.activity(activity)
+    if(Play.configuration.getBoolean("pusher.enable") getOrElse { false } ) {
+      val html =
+        views.html.activity(activity)
 
-    val json =
-      JsObject(Map(
-        JsString("html") -> JsString(html)
-      ))
-    println(Pusher.triggerPush("activity", "new", json.toString))
+      val json =
+        JsObject(Map(
+          JsString("html") -> JsString(html)
+        ))
+      println(Pusher.triggerPush("activity", "new", json.toString))
+    }
   }
 }

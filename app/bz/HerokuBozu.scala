@@ -1,18 +1,20 @@
 package bz
 
-import models.Activity
+import models._
 
 class HerokuBozu extends Bozu {
   def get(params : Map[String, Seq[String]]) : Seq[Activity] = {
     Seq(Activity(
       id        = "heroku-" + params("head_long").head,
-      title     = "Deploying %s by %s".format(params("app").head, params("user").head),
+      title     = "Deploying %s".format(params("app").head),
       body      = params("git_log").head,
       createdAt = new java.util.Date(),
       source    = "heroku",
       project   = params("app").head,
       url       = params("url").headOption.map(new java.net.URI(_)),
-      iconUrl   = None
+      iconUrl   = None,
+      author    = params("user").headOption,
+      status    = Success
     ))
   }
 }
