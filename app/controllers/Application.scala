@@ -14,6 +14,10 @@ object Application extends Controller {
     Ok(views.html.index(activities.toList))
   }
 
+  def about = Action {
+    Ok(views.html.about())
+  }
+
   def hook(name : String, params : Map[String, Seq[String]]) =
     Bozu(name) match {
       case Some(bz) =>
