@@ -9,11 +9,12 @@ Supported services
  * Jenkins
  * git
  * Redmine
+ * heroku
 
 Requirements
 -----------------------
 
-* Play 2.0 or later
+ * Play 2.0 or later
  * PostgreSQL 8 or later
 
 ### How to install
@@ -94,7 +95,13 @@ Install psot script plugin:
 Update ``$RAILS_ROOT/vender/plugins/redmine_post_script/bin/post_script.rb``:
 
     require 'open-uri'
-    open("http://dashbozu.herokuapp.com/hook/redmine?url=https://codefirst.org/redmine/activity.atom?key=[API key]") {|_|}
+    open("http://dashbozu.example.com/hook/redmine?url=https://example.com/redmine/activity.atom?key=[API key]") {|_|}
+
+### Heroku
+
+Install deployhook addon:
+
+    $ heroku addons:add deployhooks:http --url=http://dashbozu.example.com/hook/heroku
 
 Other tpis
 -----------------------
