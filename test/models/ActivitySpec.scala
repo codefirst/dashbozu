@@ -16,7 +16,9 @@ class ActivitySpec extends Specification {
                           "source0001",
                           "project0001",
                           Some(new URI("http://example.com/hoge")),
-                          Some(new URI("http://example.com/icon.png")))
+                          Some(new URI("http://example.com/icon.png")),
+                          Info,
+                          None)
   val a1 = activity.copy(id="id0001",createdAt=new Date())
   val a2 = activity.copy(id="id0002",createdAt=new Date(a1.createdAt.getTime - 1000))
   val a3 = activity.copy(id="id0003",createdAt=new Date(a1.createdAt.getTime + 1000))
