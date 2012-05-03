@@ -27,12 +27,12 @@ object Application extends Controller {
     }
 
   def hookPost(name : String) = Action { request =>
-    request.body match {
-      case AnyContentAsFormUrlEncoded(body) =>
+    request.body.asFormUrlEncoded match {
+      case Some(body) =>
         hook(name, body)
         Ok("ok")
-      case _ =>
-        BadRequest("no such hook: " + name)
+      case x =>
+        BadRequest("invalid request: " + request)
     }
   }
 

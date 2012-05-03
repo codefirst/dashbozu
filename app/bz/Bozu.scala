@@ -16,6 +16,8 @@ object Bozu {
         Some(new RedmineBozu)
       case "git" =>
         Some(new GitBozu)
+      case "heroku" =>
+        Some(new HerokuBozu)
       case _ =>
         None
     }
