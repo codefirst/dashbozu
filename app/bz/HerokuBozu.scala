@@ -1,5 +1,5 @@
 package bz
-
+import java.net.URI
 import models._
 
 class HerokuBozu extends Bozu {
@@ -11,8 +11,8 @@ class HerokuBozu extends Bozu {
       createdAt = new java.util.Date(),
       source    = "heroku",
       project   = params("app").head,
-      url       = params("url").headOption.map(new java.net.URI(_)),
-      iconUrl   = None,
+      url       = params("url").headOption.map(new URI(_)),
+      iconUrl   = params("user").headOption.map((s : String) => new URI(Bozu.getIcon(s))),
       author    = params("user").headOption,
       status    = Success
     ))
