@@ -6,6 +6,13 @@ import play.api.test.Helpers._
 import play.api.Play.current
 
 class BozuSpec extends Specification {
+  "apply redmine" should {
+    "get RedmineBozu" in {
+      val bozu = Bozu.apply("redmine")
+      bozu must beSome.which(_.getClass == classOf[RedmineBozu])
+    }
+  }
+
   "hash" should {
     "return 32 length string from 0-indexed hash" in {
       val hash = Bozu.hash("a") // 0-indexed 32bit char
