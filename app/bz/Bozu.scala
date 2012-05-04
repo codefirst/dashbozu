@@ -26,7 +26,8 @@ object Bozu {
     val m = java.security.MessageDigest.getInstance("MD5")
     val b = s.getBytes("UTF-8")
     m.update(b, 0, b.length)
-    new java.math.BigInteger(1, m.digest()).toString(16)
+    val h = new java.math.BigInteger(1, m.digest()).toString(16)
+    "0" * (32 - h.length) + h
   }
 
   def getIcon(emailaddress : String, size : Int = 80) : String = {
