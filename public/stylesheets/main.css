@@ -27,7 +27,6 @@ img.icon {
 }
 .activity .description {
     float: left;
-    width: 460px;
 }
 
 .activity .icon {
@@ -104,3 +103,4 @@ footer {
 .status-warn{
     background-color: #fcf8e3;
 }
+
