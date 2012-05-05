@@ -22,11 +22,13 @@ img.icon {
     width: 60px;
     height: 60px;
     margin-left: 10px;
-    margin-right: 10px;
+    margin-right: -90px;
     float: left;
 }
 .activity .description {
     float: left;
+    width: 100%;
+    margin-left: 90px;
 }
 
 .activity .icon {
@@ -47,13 +49,25 @@ img.icon {
     vertical-align: top;
 }
 
-.activity .title img{
+.activity .title img {
     width:16px;
     height:16px;
 }
 
 .info {
     color: gray;
+}
+
+.status-success {
+    background-color: #dff0d8;
+}
+
+.status-error {
+    background-color: #f2dede;
+}
+
+.status-warn {
+    background-color: #fcf8e3;
 }
 
 footer {
@@ -79,28 +93,14 @@ footer {
         width: 40px;
         height: 40px;
         margin-left: 0px;
-        margin-right: 0px;
-        float: left;
+        margin-right: -50px;
     }
     .activity .description {
         width: 200px;
-        float: left;
+        margin-left: 50px;
     }
     footer span {
         display: block;
     }
-}
-
-
-.status-success{
-    background-color: #dff0d8;
-}
-
-.status-error{
-    background-color: #f2dede;
-}
-
-.status-warn{
-    background-color: #fcf8e3;
 }
 
