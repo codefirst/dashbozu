@@ -103,7 +103,7 @@ Install deployhook addon:
 
     $ heroku addons:add deployhooks:http --url=http://dashbozu.example.com/hook/heroku
 
-Other tpis
+Other tips
 -----------------------
 ### Deploy to heroku
 
@@ -135,3 +135,4 @@ GES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARI
 ### Dashbozu depends on below software:
 
  * [Twitter Bootstrap](http://twitter.github.com/bootstrap/) - Apache License 2.0
+
