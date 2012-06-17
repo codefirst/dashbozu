@@ -44,5 +44,6 @@ object Application extends Controller {
   ActivityDB.subscribe { x =>
     ActivityPusher.publish(x)
     Boxcar.publish(x)
+    WebSocketNotifier.publish(x)
   }
 }

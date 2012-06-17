@@ -1,6 +1,17 @@
 @(activities: List[models.Activity])
-
+@import play.api.Play.current
 @main("index") {
+<script type="text/javascript">
+  var Dashbozu = {
+    websocket : {
+     enable : @play.api.Play.configuration.getBoolean("websocket.enable").getOrElse{ false }
+    },
+    pusher : {
+     enable : @play.api.Play.configuration.getBoolean("pusher.enable").getOrElse{ false }
+    }
+  };
+</script>
+<script src="@routes.Assets.at("javascripts/main.js")" type="text/javascript"></script>
 <div class="well activities">
   @activities.map { x =>
     @activity(x)

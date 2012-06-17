@@ -7,6 +7,7 @@ GET     /                           controllers.Application.index
 GET     /about                      controllers.Application.about
 GET     /hook/:name controllers.Application.hookGet(name : String)
 POST    /hook/:name controllers.Application.hookPost(name : String)
+GET     /ws controllers.WebSocketNotifier.ws
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
