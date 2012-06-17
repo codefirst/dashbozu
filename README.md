@@ -109,6 +109,12 @@ Other tips
 
 Update ``conf/heroku.conf`` and see [Documentation: ProductionHeroku - Playframework](http://www.playframework.org/documentation/2.0/ProductionHeroku).
 
+### Testing dashbozu
+
+To testing dashbozu, we recomend use heroku bozu.
+
+    $ curl "http://localhost:9000/hook/heroku?head_long=$(uuid)&app=test&git_log=$(uuid)&url=http://example.com&user=mzp"
+
 Author
 -----------------------
  * @banjun
