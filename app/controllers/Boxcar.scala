@@ -18,7 +18,7 @@ object Boxcar {
         "secret" -> "JzJcqzNFqt81JTK5MXYpDiVYBRNXjoKTKkX1Hk3k",
         "notification[from_screen_name]" -> activity.project,
         "notification[message]" -> activity.title,
-        "notification[source_url]" -> activity.url.toString)
+        "notification[source_url]" -> activity.url.map{ _.toString }.getOrElse{ "" } )
       Http( url << params >|)
     }
   }

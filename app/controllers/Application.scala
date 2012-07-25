@@ -45,5 +45,8 @@ object Application extends Controller {
     ActivityPusher.publish(x)
     Boxcar.publish(x)
     WebSocketNotifier.publish(x)
+
+    if(AsakusaSatellite.isEnable)
+      AsakusaSatellite.publish(x)
   }
 }
