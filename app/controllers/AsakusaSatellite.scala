@@ -26,7 +26,7 @@ object AsakusaSatellite {
       val entryPoint =
         dispatch.url(url) / "api" / "v1" /"message"
       val params = Map(
-        "message" -> "%s\n%s\n\n%s".format(
+        "message" -> "Project: %s\n%s\n\n%s".format(
           activity.project,
           activity.title,
           activity.url.map{ _.toString }.getOrElse{ "" }
