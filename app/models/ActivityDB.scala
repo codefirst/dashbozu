@@ -42,7 +42,7 @@ object ActivityDB extends Table[Activity]("ACTIVITY") with Subscribe[Activity] {
 
   def find(id : String) : Option[Activity] =
     db.withSession { implicit db : Session =>
-      (for (t <- this; _ <- Query orderBy Ordering.Desc(t.createdAt)) yield t.*).firstOption
+      ActivityDB.where( x => x.id is id).map(_.*).firstOption
     }
 
   def tee[A]( x : A)(action : A => Unit) : A = {
