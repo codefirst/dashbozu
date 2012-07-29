@@ -22,17 +22,12 @@ object AsakusaSatellite {
       url     <- config.getString("url")
       api_key <- config.getString("api_key")
       room_id <- config.getString("room_id")
+      dashbozu_url <- config.getString("dashbozu_url")
     } {
       val entryPoint =
         dispatch.url(url) / "api" / "v1" /"message"
       val params = Map(
-        "message" -> "Project: %s[%s]\n%s\n%s\n\n%s".format(
-          activity.project,
-          activity.source,
-          activity.title,
-          activity.body,
-          activity.url.map{ _.toString }.getOrElse{ "" }
-        ),
+        "message" -> (dashbozu_url + routes.Application.show(activity.id).url),
         "room_id" -> room_id,
         "api_key" -> api_key
       )
