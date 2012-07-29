@@ -1,0 +1,7 @@
+@(host : String, x: models.Activity)
+<div>
+  <link rel="stylesheet" media="screen" href="//@host@routes.Assets.at("stylesheets/bootstrap.min.css")">
+  <link rel="stylesheet" media="screen" href="//@host@routes.Assets.at("stylesheets/bootstrap-responsive.css")">
+  <Link rel="stylesheet" media="screen" href="//@host@routes.Assets.at("stylesheets/main.css")">
+  @activity(x, "//"+host)
+</div>

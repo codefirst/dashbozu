@@ -1,7 +1,7 @@
-@(activity: models.Activity)
+@(activity: models.Activity, host : String = "")
 <div class="activity row status-@activity.status.toString.toLowerCase">
   <div class="icon">
-    <img class="icon" src="@routes.Assets.at("images/icons/" + activity.source + ".png")" />
+    <img class="icon" src="@host@routes.Assets.at("images/icons/" + activity.source + ".png")" />
   </div>
   <div class="description">
     <div class="title">
@@ -21,7 +21,9 @@
       @Html(activity.body)
     </div>
     <div class="time">
-      @activity.createdAt
+      <a href="@routes.Application.show(activity.id)">
+        @activity.createdAt
+      </a>
     </div>
   </div>
 </div>

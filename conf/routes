@@ -5,6 +5,8 @@
 # Home page
 GET     /                           controllers.Application.index
 GET     /about                      controllers.Application.about
+GET     /embed/:id                   controllers.Application.embed(id : String)
+GET     /show/:id                   controllers.Application.show(id : String)
 GET     /hook/:name controllers.Application.hookGet(name : String)
 POST    /hook/:name controllers.Application.hookPost(name : String)
 GET     /ws controllers.WebSocketNotifier.ws

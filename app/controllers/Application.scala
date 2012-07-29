@@ -41,6 +41,24 @@ object Application extends Controller {
     Ok("ok")
   }
 
+  def show(id : String) = Action {
+    ActivityDB.find(id) match {
+      case None =>
+        NotFound("no such activity: " + id)
+      case Some(activity) =>
+        Ok(views.html.show(activity))
+    }
+  }
+
+  def embed(id : String) = Action { implicit request =>
+    ActivityDB.find(id) match {
+      case None =>
+        NotFound("no such activity: " + id)
+      case Some(activity) =>
+        Ok(views.html.embed(request.host, activity))
+    }
+  }
+
   ActivityDB.subscribe { x =>
     ActivityPusher.publish(x)
     Boxcar.publish(x)
