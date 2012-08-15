@@ -18,6 +18,8 @@ object Bozu {
         Some(new GitBozu)
       case "heroku" =>
         Some(new HerokuBozu)
+      case "travisci" =>
+        Some(new TravisCIBozu)
       case _ =>
         None
     }

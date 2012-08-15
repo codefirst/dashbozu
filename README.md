@@ -9,7 +9,8 @@ Supported services
  * Jenkins
  * git
  * Redmine
- * heroku
+ * Heroku
+ * Travis CI
 
 Requirements
 -----------------------
@@ -102,6 +103,13 @@ Update ``$RAILS_ROOT/vender/plugins/redmine_post_script/bin/post_script.rb``:
 Install deployhook addon:
 
     $ heroku addons:add deployhooks:http --url=http://dashbozu.example.com/hook/heroku
+
+### Travis CI
+
+Add webhook setting to .travis.yml
+
+    notifications:
+      webhooks: http://dashbozu.example.com/hook/travisci
 
 Other tips
 -----------------------
