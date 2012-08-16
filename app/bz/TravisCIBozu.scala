@@ -7,12 +7,11 @@ class TravisCIBozu extends Bozu {
   def get(params : Map[String, Seq[String]]) : Seq[Activity] = {
 
     val jsonString:String = params("payload").head
-    println(jsonString)
     val json:Option[Any] = JSON.parseFull(jsonString)
     val map:Map[String,Any] = json.get.asInstanceOf[Map[String, Any]]
     val id:Int= map.get("id").get.asInstanceOf[Double].toInt
     val number:String= map.get("number").get.asInstanceOf[String]
-    val statusMessage:String = map.get("status_message").get.asInstanceOf[String]
+    val statusId:Int= map.get("status").get.asInstanceOf[Double].toInt
     val message:String = map.get("message").get.asInstanceOf[String]
     val repoMap:Map[String,Any] = map.get("repository").get.asInstanceOf[Map[String, Any]]
     val ownerName:String = repoMap.get("owner_name").get.asInstanceOf[String]
@@ -22,8 +21,8 @@ class TravisCIBozu extends Bozu {
     val buildURL:String = "http://travis-ci.org/#!/" + ownerName + "/" + projectName + "/builds/" + number
 
     val status =
-      statusMessage match {
-        case "Passed" =>
+      statusId match {
+        case 0 =>
           Success
         case _ =>
           Error
