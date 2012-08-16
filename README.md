@@ -1,6 +1,10 @@
 Dashbozu
 =====================================
 
+[![Build Status](https://secure.travis-ci.org/codefirst/dashbozu.png?branch=master)](http://travis-ci.org/codefirst/dashbozu)
+
+Overview
+----------------
 Dashbozu is an integration service of all dashboards of the world!
 
 Supported services
