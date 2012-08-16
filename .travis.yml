@@ -1,0 +1,5 @@
+language: scala
+
+notifications:
+  webhooks: http://dashbozu.herokuapp.com/hook/travisci
+
