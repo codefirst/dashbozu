@@ -7,10 +7,11 @@ class TravisCIBozu extends Bozu {
   def get(params : Map[String, Seq[String]]) : Seq[Activity] = {
 
     val jsonString:String = params("payload").head
+    println(jsonString)
     val json:Option[Any] = JSON.parseFull(jsonString)
     val map:Map[String,Any] = json.get.asInstanceOf[Map[String, Any]]
     val id:Int= map.get("id").get.asInstanceOf[Double].toInt
-    val number:Int= map.get("number").get.asInstanceOf[Double].toInt
+    val number:String= map.get("number").get.asInstanceOf[String]
     val statusMessage:String = map.get("status_message").get.asInstanceOf[String]
     val message:String = map.get("message").get.asInstanceOf[String]
     val repoMap:Map[String,Any] = map.get("repository").get.asInstanceOf[Map[String, Any]]
@@ -18,7 +19,7 @@ class TravisCIBozu extends Bozu {
     val projectName:String = repoMap.get("name").get.asInstanceOf[String]
     val committerEmail:String = map.get("committer_email").get.asInstanceOf[String]
     val committerName:String = map.get("committer_name").get.asInstanceOf[String]
-    val buildURL:String = "http://travis-ci.org/#!/" + ownerName + "/" + projectName + "/builds/" + number.toString
+    val buildURL:String = "http://travis-ci.org/#!/" + ownerName + "/" + projectName + "/builds/" + number
 
     val status =
       statusMessage match {
@@ -30,7 +31,7 @@ class TravisCIBozu extends Bozu {
 
     Seq(Activity(
       id        = "travisci-" + id.toString,
-      title     = projectName + " - Travis CI #" + number.toString,
+      title     = projectName + " - Travis CI #" + number,
       body      = message,
       createdAt = new java.util.Date(),
       source    = "travisci",
