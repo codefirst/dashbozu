@@ -24,6 +24,8 @@
             elem.hide();
             $(".activities").prepend(elem);
             elem.fadeIn();
+
+            notifyWebkitNotification(data);
         };
     }
 
@@ -53,6 +55,43 @@
             elem.hide();
             $(".activities").prepend(elem);
             elem.fadeIn();
+
+            notifyWebkitNotification(data);
         });
     }
+
+    // Desktop Notification
+    var enableWebkitNotification = function() {
+        if (window.webkitNotifications) {
+            if (window.webkitNotifications.checkPermission()) {
+                window.webkitNotifications.requestPermission(function(){});
+            }
+        }
+    }
+    var notifyWebkitNotification = function(data) {
+        var assetPrefix = '/assets/images/icons/';
+        var assetExt = ".png";
+        if (window.webkitNotifications) {
+            if (!window.webkitNotifications.checkPermission()) {
+                var popup = window.webkitNotifications.createNotification(
+                    assetPrefix + data.source + assetExt, data.title, data.body
+                );
+                popup.show();
+            }
+        }
+    }
+
+    $(function() {
+        if (window.webkitNotifications && window.webkitNotifications.checkPermission() != 0) {
+            $('.top-right').click(function(){
+                enableWebkitNotification();
+            }).notify({
+                fadeOut: { enabled: true, delay: 6000 },
+                closable: false,
+                type: 'inverse',
+                message: { text: 'Click here to enable Desktop Notifications.' }
+            }).show();
+        }
+    });
+
 })(jQuery, document);

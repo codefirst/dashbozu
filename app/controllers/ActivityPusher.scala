@@ -23,7 +23,10 @@ object ActivityPusher {
 
       val json =
         JsObject(Map(
-          JsString("html") -> JsString(html)
+          JsString("html") -> JsString(html),
+          JsString("title") -> JsString(activity.title),
+          JsString("body") -> JsString(activity.body),
+          JsString("source") -> JsString(activity.source)
         ))
       println(Pusher.triggerPush("activity", "new", json.toString))
     }

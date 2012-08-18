@@ -41,7 +41,10 @@ object WebSocketNotifier extends Controller {
 
               val json =
                 JsObject(Map(
-                  JsString("html") -> JsString(html)
+                  JsString("html") -> JsString(html),
+                  JsString("title") -> JsString(event.activity.title),
+                  JsString("body") -> JsString(event.activity.body),
+                  JsString("source") -> JsString(event.activity.source)
                 ))
               pushee.push(json.toString)
           }
