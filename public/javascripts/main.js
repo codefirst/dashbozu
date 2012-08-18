@@ -1,16 +1,10 @@
-(function(){
+(function($, document, undefined){
     if(Dashbozu.websocket.enable) {
-        console.log("initialize websocket");
+        if (!!console.log) {
+            console.log("initialize websocket");
+        }
         var ws = new WebSocket("ws://localhost:9000/ws");
 
-        ws.onmessage = function(event) {
-            var data = JSON.parse(event.data);
-            console.log(data);
-            var elem = $(data.html);
-            elem.hide();
-            $(".activities").prepend(elem);
-            elem.fadeIn();
-        };
         ws.onopen = function(){
             $(".brand").css("color", "#fff");
         }
@@ -20,6 +14,17 @@
         ws.onerror = function(){
             $(".brand").css("color", "#3F9FD9");
         }
+
+        ws.onmessage = function(event) {
+            var data = JSON.parse(event.data);
+            if (!!console.log) {
+                console.log(data);
+            }
+            var elem = $(data.html);
+            elem.hide();
+            $(".activities").prepend(elem);
+            elem.fadeIn();
+        };
     }
 
     if(Dashbozu.pusher.enable) {
@@ -50,4 +55,4 @@
             elem.fadeIn();
         });
     }
-})();
+})(jQuery, document);
