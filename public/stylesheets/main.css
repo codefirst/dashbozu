@@ -72,6 +72,10 @@ img.icon {
 .clickable {
     cursor: pointer;
 }
+.notifications.top-right {
+  right: 10px;
+  top: 50px;
+}
 
 footer {
     text-align: center;
