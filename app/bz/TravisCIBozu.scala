@@ -18,7 +18,7 @@ class TravisCIBozu extends Bozu {
     val projectName:String = repoMap.get("name").get.asInstanceOf[String]
     val committerEmail:String = map.get("committer_email").get.asInstanceOf[String]
     val committerName:String = map.get("committer_name").get.asInstanceOf[String]
-    val buildURL:String = "http://travis-ci.org/#!/" + ownerName + "/" + projectName + "/builds/" + number
+    val buildURL:String = "http://travis-ci.org/#!/" + ownerName + "/" + projectName + "/builds/" + id.toString
 
     val status =
       statusId match {
