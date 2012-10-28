@@ -16,6 +16,7 @@ Supported services
  * Heroku
  * Travis CI
  * GitHub
+ * NewRelic (alerts)
 
 Requirements
 -----------------------
@@ -119,6 +120,10 @@ Add webhook setting to .travis.yml
 ### GitHub
 
 Set webhook URL to http://dashbozu.example.com/hook/github
+
+### NewRelic
+
+Set webhook URL to http://dashbozu.example.com/hook/newrelic
 
 Other tips
 -----------------------
