@@ -22,6 +22,8 @@ object Bozu {
         Some(new TravisCIBozu)
       case "github" =>
         Some(new GitHubBozu)
+      case "newrelic" =>
+        Some(new NewRelicBozu)
       case _ =>
         None
     }
