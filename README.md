@@ -15,6 +15,7 @@ Supported services
  * Redmine
  * Heroku
  * Travis CI
+ * GitHub
 
 Requirements
 -----------------------
@@ -114,6 +115,10 @@ Add webhook setting to .travis.yml
 
     notifications:
       webhooks: http://dashbozu.example.com/hook/travisci
+
+### GitHub
+
+Set webhook URL to http://dashbozu.example.com/hook/github
 
 Other tips
 -----------------------
