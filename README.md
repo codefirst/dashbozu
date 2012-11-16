@@ -119,7 +119,14 @@ Add webhook setting to .travis.yml
 
 ### GitHub
 
-Set webhook URL to http://dashbozu.example.com/hook/github
+Set webhook URL to http://dashbozu.example.com/hook/github via API:
+
+    curl -u USER_NAME -i \
+      -X POST \
+      -H "Accept: application/json" -H "Content-type: application/json" \
+      -d '{ "name": "web", "active": true, "events": [ "push", "pull_request", "issues", "issue_comment" ],
+        "config": { "url": "http://dashbozu.example.com/hook/github", "content_type": "form" } }' \
+      https://api.github.com/repos/USER_NAME/PROJECT_NAME/hooks
 
 ### NewRelic
 
