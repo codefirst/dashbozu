@@ -15,6 +15,7 @@ class NewRelicBozu extends Bozu {
 
       val projectName:String = map.get("application_name").get.asInstanceOf[String]
       var url = map.get("alert_url").get.asInstanceOf[String]
+      url = url.replace("[", "").replace("]", "")
       val title:String = map.get("short_description").get.asInstanceOf[String]
       val message:String = map.get("long_description").get.asInstanceOf[String]
 
