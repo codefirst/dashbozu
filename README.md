@@ -94,15 +94,13 @@ And add ``post-receive``:
 
 ### Redmine
 
-Install psot script plugin:
+Install redmine dashbozu notifiler plugin:
 
-    $ cd $RAILS_ROOT/vender/plugins
-    $ git clone git://github.com/suer/redmine_post_script.git
+    $ cd $RAILS_ROOT/plugins
+    $ git clone git://github.com/suer/redmine_dashbozu_notifiler.git
 
-Update ``$RAILS_ROOT/vender/plugins/redmine_post_script/bin/post_script.rb``:
-
-    require 'open-uri'
-    open("http://dashbozu.example.com/hook/redmine?url=https://example.com/redmine/activity.atom?key=[API key]") {|_|}
+Access to plugin settings page: Administration > Plugins > Redmine Dashbozu Notifier plugin's "Configure".
+Then set dashbozu root URL.
 
 ### Heroku
 
