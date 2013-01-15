@@ -55,7 +55,13 @@ object Application extends Controller {
       case None =>
         NotFound("no such activity: " + id)
       case Some(activity) =>
-        Ok(views.html.embed(request.host, activity))
+        val color = activity.status.toString.toLowerCase match {
+          case "success" => "#dff0d8"
+          case "error"  =>  "#f2dede"
+          case "warn" => "#fcf8e3"
+          case _ => "#ffffff"
+        }
+        Ok(views.html.embed(request.host, activity, color))
     }
   }
 

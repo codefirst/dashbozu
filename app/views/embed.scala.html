@@ -1,7 +1,22 @@
-@(host : String, x: models.Activity)
-<html>
-  <link rel="stylesheet" media="screen" href="//@host@routes.Assets.at("stylesheets/bootstrap.min.css")" />
-  <link rel="stylesheet" media="screen" href="//@host@routes.Assets.at("stylesheets/bootstrap-responsive.css")" />
-  <link rel="stylesheet" media="screen" href="//@host@routes.Assets.at("stylesheets/main.css")" />
-  @activity(x, "//"+host)
-</html>
+@(host : String, act: models.Activity, color : String)
+<div style="padding: 10px; margin:0; font-size: 13px; line-height: 18px; background-color: @color">
+  <div style="width: 60px; height: 60px; margin-left: 10px; margin-right: -90px; float: left;">
+    <img class="icon" src="//@host@routes.Assets.at("images/icons/" + act.source + ".png")" />
+  </div>
+  <div style="float: left; width: 80%; margin-left: 90px">
+    <div>
+      <img src="@act.iconUrl" />
+      <a target="_blank" href="@act.url">@act.title</a>
+    </div>
+    <div style="color:gray">
+      by @act.author.getOrElse("nobody") | @act.project
+    </div>
+    <div>
+      @Html(act.body)
+    </div>
+    <div style="color: gray">
+      <a href="@routes.Application.show(act.id)">@act.createdAt</a>
+    </div>
+  </div>
+  <div style="clear:both"/>
+</div>
