@@ -24,6 +24,8 @@ object Bozu {
         Some(new GitHubBozu)
       case "newrelic" =>
         Some(new NewRelicBozu)
+      case "webhook" =>
+        Some(new WebhookBozu)
       case _ =>
         None
     }
