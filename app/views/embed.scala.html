@@ -1,7 +1,7 @@
 @(host : String, act: models.Activity, color : String)
 <div style="padding: 10px; margin:0; font-size: 13px; line-height: 18px; background-color: @color">
   <div style="width: 60px; height: 60px; margin-left: 10px; margin-right: -90px; float: left;">
-    <img class="icon" src="//@host@routes.Assets.at("images/icons/" + act.source + ".png")" />
+    <img class="icon" src="//@host@routes.Assets.at("images/icons/" + act.source + ".png")" width="60" height="60" />
   </div>
   <div style="float: left; width: 80%; margin-left: 90px">
     <div>
@@ -15,7 +15,7 @@
       @Html(act.body)
     </div>
     <div style="color: gray">
-      <a href="@routes.Application.show(act.id)">@act.createdAt</a>
+      <a href="//@host@routes.Application.show(act.id)">@act.createdAt</a>
     </div>
   </div>
   <div style="clear:both"/>
