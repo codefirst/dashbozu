@@ -15,8 +15,8 @@ class JenkinsBozu extends Bozu {
       project  <- params.get("project").toSeq.flatMap(_.headOption)
       apiurl   =  url("%s/job/%s/api/xml?depth=2".format(domain, project))
       activity <- Http( apiurl <> { elem => {
-        (elem \\ "build").map(build => {
-          val projectName = (elem \\ "displayName").text
+        (elem \ "build").map(build => {
+          val projectName = (elem \ "displayName").text
 
           val id        = (build \ "url").text
           val title     = "%s #%s (%s)".format(projectName,
