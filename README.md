@@ -1,6 +1,10 @@
 Dashbozu
 =====================================
 
+Caution!
+----------------
+This product is no longer maintained. Visit to [Dashbozu2](https://github.com/codefirst/dashbozu2) project page.
+
 [![Build Status](https://secure.travis-ci.org/codefirst/dashbozu.png?branch=master)](http://travis-ci.org/codefirst/dashbozu)
 
 Overview
